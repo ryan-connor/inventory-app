@@ -26,25 +26,29 @@
       <li>
         <a href='/catalog/hatInstance/create'>Create new instance of a hat</a>
       </li>
-
     </ul>
 
-
+    
   <div class='content'>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %>, the best places to buy hats!</p>
+    <p><%= title %></p>
 
-    <p>The current available inventory is:</p>
+    <div>The current hats are:</div>
+    <!-- write it in js first then just surround each line with <% %>, use <%= %> to actually display it -->
     <ul>
-      <li>Different Types of Hats Available: <%= data.hat_count %></li>
-      <li>Total units in stock now: <%= data.hatInstance_count %></li>
-      <li>Different Categories of hats: <%= data.category_count %></li>
+    <%hat_list.sort();%>
+    <%hat_list.forEach( (item) => {%>
+        <li class='singleHat'>
+        <a href=item.url><%=item.name%></a>
+        <div>Price: <%=item.price%></div>
+        <div>Category: <%= item.category[0].name %></div>
+        </li>
+    <%});%>
     </ul>
-  </div>
 
 
   </div>
