@@ -66,7 +66,41 @@ exports.hat_list = function (req, res, next) {
 
 //display specific hat page
 exports.hat_detail = function (req, res) {
-    res.send('Hat detail page not implmented yet');
+
+
+    let results= {};
+    //async in parallel
+    
+    //get category by id first
+    let getHat = async function () {
+        results.hat = await Hat.findById(req.params.id).populate('category').exec();
+    };
+    
+    //get all hats associated with that category by the id
+    let getHatInstances = async function () {
+        results.hatInstances = await HatInstance.find({hat: req.params.id}).exec();
+    };
+    
+    //function to call both other functions and then render the results
+    let getResults = async function () {
+    
+        await Promise.allSettled([getHat(), getHatInstances()]);
+    
+        if (results.hat === null) {
+            let err = new Error;
+            console.log('hat was null error');
+            err.status = 404;
+            return next(err);
+        }
+    
+        console.log('results:', results);
+    
+        res.render('hat_detail', {title: results.hat.name, hat: results.hat, hatInstances: results.hatInstances })
+    }
+    
+    getResults();
+
+
 }
 
 //display form to create new hat on GET

@@ -17,9 +17,6 @@ router.get('/hat/create', hatController.hat_create_form);
 //post form to create hat
 router.get('hat/create', hatController.hat_create);
 
-//get detail page of a hat
-router.get('/hat/:id/detail', hatController.hat_detail);
-
 //get form to update hat
 router.get('/hat/:id/update', hatController.hat_update_form);
 
@@ -34,6 +31,9 @@ router.get('/hat/:id/delete', hatController.hat_delete);
 
 //get list of hats
 router.get('/hat/list', hatController.hat_list);
+
+//get detail page of a hat
+router.get('/hat/:id', hatController.hat_detail);
 
 
 
@@ -58,11 +58,11 @@ router.get('/hatInstance/:id/delete', hatInstanceController.hatInstance_delete_f
 //post delete hat instance
 router.get('/hatInstance/:id/delete', hatInstanceController.hatInstance_delete);
 
-//get hat instance detail
-router.get('/hatInstance/:id/detail', hatInstanceController.hatInstance_detail);
-
 //list all hat instances
 router.get('/hatInstance/list', hatInstanceController.hatInstance_list);
+
+//get hat instance detail
+router.get('/hatInstance/:id', hatInstanceController.hatInstance_detail);
 
 
 //category routes
@@ -85,10 +85,12 @@ router.get('/category/:id/delete', categoryController.category_delete_form);
 //post delete category
 router.post('/category/:id/delete', categoryController.category_delete);
 
-//get category detail
-router.get('/category/:id/detail', categoryController.category_detail);
-
 //list all categories
 router.get('/category/list', categoryController.category_list);
+
+//get category detail
+router.get('/category/:id', categoryController.category_detail);
+
+
 
 module.exports = router;

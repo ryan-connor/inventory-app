@@ -1,13 +1,54 @@
-let category = require('../models/category');
+let Category = require('../models/category');
+let Hat = require('../models/hat');
 
 //display list of categories
-exports.category_list = function (req, res) {
-    res.send('Category list not implemnted yet');
+exports.category_list = function (req, res, next) {
+
+    Category.find().exec( function (err, list) {
+        if (err) {
+
+            return next(err);
+        }
+        res.render('category_list', {title: 'All Categories of hats:', category_list: list});
+    });
+
 };
 
 //display page for specific category
-exports.category_detail = function (req, res) {
-    res.send('Category detail page not implemented yet');
+exports.category_detail = function (req, res, next) {
+
+let results= {};
+//async in parallel
+
+//get category by id first
+let getCategory = async function () {
+    results.category = await Category.findById(req.params.id).exec();
+};
+
+//get all hats associated with that category by the id
+let getHats = async function () {
+    results.hats = await Hat.find({category: req.params.id}).exec();
+};
+
+//function to call both other functions and then render the results
+let getResults = async function () {
+
+    await Promise.allSettled([getCategory(), getHats()]);
+
+    if (results.category === null) {
+        let err = new Error;
+        console.log('category was null error');
+        err.status = 404;
+        return next(err);
+    }
+
+    console.log('results:', results);
+
+    res.render('category_detail', {title: 'Category Detail', category: results.category, category_hats: results.hats })
+}
+
+getResults();
+    
 };
 
 //display form to create category on GET

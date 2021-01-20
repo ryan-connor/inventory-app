@@ -37,19 +37,13 @@
     <h1><%= title %></h1>
     <p><%= title %></p>
 
-    <div>The current hats are:</div>
+    <div>Info about the hat:</div>
     <!-- write it in js first then just surround each line with <% %>, use <%= %> to actually display it -->
-    <ul>
-    <%hat_list.sort();%>
-    <%hat_list.forEach( (item) => {%>
-        <li class='singleHat'>
-        <a href= <%=item._id %> ><%=item.name%></a>
-        <div>Price: <%=item.price%></div>
-        <div>Category: <%= item.category[0].name %></div>
-        </li>
-    <%});%>
-    </ul>
 
+    <div> <%=hatInstance.hat.name%></div>
+    <div> $<%=hatInstance.serial%></div>
+    <% let url = "/catalog/hat/" + hatInstance.hat._id; %>
+    <div> <a href= <%= url %> > <%=hatInstance.hat.name%></a></div>
 
   </div>
 

@@ -1,13 +1,25 @@
-let hatInstance = require('../models/hatInstance');
+let HatInstance = require('../models/hatInstance');
 
 //display list of all hat instances
-exports.hatInstance_list = function (req, res) {
-    res.send('hat Instance list not implemnted yet');
+exports.hatInstance_list = function (req, res, next) {
+
+    HatInstance.find().populate('hat').exec( function(err, list) {
+        if (err) {
+            return next(err);
+        }
+        res.render('hatInstance_list', {title: 'Hat Units Available', hatInstance_list: list});
+    })
+
+
 };
 
 //dispaly detail page of hat instance
-exports.hatInstance_detail = function (req, res) {
-    res.send('hat instance detail page not implemnted yet');
+exports.hatInstance_detail = async function (req, res) {
+
+    let result = await HatInstance.findById(req.params.id).populate('hat').exec();
+
+    res.render('hatInstance_detail', {title: 'Hat Instance', hatInstance: result});
+
 };
 
 //display form to create hat instance on GET
