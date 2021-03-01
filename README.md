@@ -1,1 +1,8 @@
-Inventory app to practice using Express and Mongodb.
+## Inventory App
+Simple small inventory project based off of a MDN Tutorial.
+
+## Description
+Simple small project based off of a MDN Tutorial to practice using the MVC pattern to make a simple express app with multiple pages. EJS was used as the template engine to render the frontend pages server side. Users can view hats in the inventory, and then see related pages such as a detail page for each type of hat and a list of hat categories that displays all the hats in each category. A MongoDb is used to store all the info, and Mongoose was used to access/modify it. To be clear this project is not fully complete, it was used to help practice some concepts, but was not fully finished.
+
+## Why?
+The main purpose of this project was to familiarize myself with the MVC pattern, specifically applied to a simple express app. It was good practice using Mongoose to access a MongoDb and display info from it. It was also interesting to get some exposure to server side rendering using a template engine to display the various views. The most challenging part of this project was getting used to splitting everything up into models, controllers, and views, but I can see the value in separating the concerns like that, and once everything was initially set up it was pretty clean to add functionality. To be clear this project is not fully complete, it was used to help practice some concepts, but was not fully finished.
